@@ -17,12 +17,27 @@ your cluster has `singularity` installed).
 - Once set up, singularity allows you and your colleagues to use exactly the
   same environment. **no more "it works on my machine"**
 
+<!-- toc -->
+
+- [What is Docker?](#what-is-docker)
+- [What is Singularity?](#what-is-singularity)
+- [Running Docker containers on Maxwell](#running-docker-containers-on-maxwell)
+  * [Mandatory configuration](#mandatory-configuration)
+  * [Running your first container](#running-your-first-container)
+- [Creating your own images](#creating-your-own-images)
+  * [Setting up the GitHub repo](#setting-up-the-github-repo)
+  * [Versioning your images](#versioning-your-images)
+  * [Pulling the image to Maxwell](#pulling-the-image-to-maxwell)
+- [Set up VSCode to run in singularity](#set-up-vscode-to-run-in-singularity)
+
+<!-- tocstop -->
+
 **Note**:
 Singularity has been renamed to Apptainer some time ago, but the Maxwell cluster
 still uses a version which is called `singularity`. Just so you won't be confused when
 you google stuff about commands etc. at some point.
 
-### What you'll need:
+**What you'll need:**
 
 **For running containers on the cluster**:
 - Access to the cluster
