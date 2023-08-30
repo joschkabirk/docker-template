@@ -145,17 +145,19 @@ After that, it executed the image and streamed the output to your terminal.
 The output `Hello from Docker!` and the lines after that are the output of 
 the `hello-world` container.
 
-## Setting up the GitHub repo
+## Creating your own images
+
+### Setting up the GitHub repo
 
 - create repo
 - add Dockerfile
 - add basic CI/CD workflow
 - add the Dockerhub API key and username to the repository secrets
 
-## Versioning your images
+### Versioning your images
 - add additional CI/CD workflow for tagged commits
 
-## Pulling the image to Maxwell
+### Pulling the image to Maxwell
 - example command to build/convert image
 
 ## Set up VSCode to run in singularity
