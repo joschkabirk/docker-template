@@ -28,6 +28,7 @@ your cluster has `singularity` installed).
   * [Mandatory configuration](#mandatory-configuration)
   * [Running your first container](#running-your-first-container)
 - [Creating your own images](#creating-your-own-images)
+  * [Setting up the DockerHub repo](#setting-up-the-dockerhub-repo)
   * [Setting up the GitHub repo](#setting-up-the-github-repo)
   * [Versioning your images](#versioning-your-images)
   * [Pulling the image to Maxwell](#pulling-the-image-to-maxwell)
