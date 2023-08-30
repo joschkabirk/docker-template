@@ -38,8 +38,11 @@ What you'll need:
 
 - create repo
 - add Dockerfile
-- add CI/CD workflow
-- add the Dockerhub API key
+- add basic CI/CD workflow
+- add the Dockerhub API key and username to the repository secrets
+
+## Versioning your images
+- add additional CI/CD workflow for tagged commits
 
 ## Pulling the image to Maxwell
 - setup of env variables
