@@ -108,6 +108,14 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
  ```
+ 
+**What happened here?**
+When you executed the `singularity run` command, singularity first downloaded
+the docker image from DockerHub and then converted it to a singularity image
+(`.sif` file).
+After that, it executed the image and streamed the output to your terminal.
+The output `Hello from Docker!` and the lines after that are the output of 
+the `hello-world` container.
 
 ## Setting up the GitHub repo
 
