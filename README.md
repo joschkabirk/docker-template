@@ -37,9 +37,28 @@ Actions to automatically build and push your images to DockerHub.
 
 ## What is Docker?
 
-[Docker in 100 seconds](https://www.youtube.com/watch?v=Gjnup-PuquQ)
+Given that this is a getting-started guide for physicists, who are probably
+looking for a way to create reproducible environments for their data analysis,
+you can think of Docker as a way to create reproducible python environments.
+
+If you are familiar with `conda`, you can think of Docker as a more robust
+alternative to `conda` environments.
+
+There is a nice video on YouTube that explains the basics of Docker in 100
+seconds:
+[Docker in 100 seconds](https://www.youtube.com/watch?v=Gjnup-PuquQ).
 
 ## What is Singularity?
+
+The not very technical answer is that Singularity is a container runtime that
+can run Docker containers.
+Usually, you would use Singularity to run containers on HPCs where you don't
+have root access and can't install Docker.
+
+Singularity kind of reduces the isolation of Docker containers, in terms of 
+the user-id and the file system (e.g. by default your home directory is mounted
+into the container and the user in the container is the same as the user on the
+host system).
 
 [Nice article that briefly compares Docker and Singularity](https://pythonspeed.com/articles/containers-filesystem-data-processing/#:~:text=Singularity%20is%20a%20container%20runtime,container%2C%20and%20providing%20reproducible%20images.).
 
