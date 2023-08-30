@@ -21,10 +21,18 @@ Singularity has been renamed to Apptainer some time ago, but the Maxwell cluster
 still uses a version which is called `singularity`. Just so you won't be confused when
 you google stuff about commands etc. at some point.
 
-What you'll need:
+### What you'll need:
+
+**For running containers on the cluster**:
+- Access to the cluster
+
+**For creating your own containers**:
 - A GitHub account
 - A DockerHub account
-- Access to the Maxwell cluster
+
+Strictly speaking, you don't need a GitHub account to create your own containers,
+but it is a good idea to use GitHub to version your Dockerfiles and to use GitHub
+Actions to automatically build and push your images to DockerHub.
 
 ## What is Docker?
 
