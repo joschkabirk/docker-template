@@ -181,6 +181,36 @@ the tag `latest`.
 For tagged commits, the image will be also pushed to DockerHub with the tag
 `<tagname>`.
 
+### Setting up the DockerHub repo
+
+First, create a DockerHub repository.
+You can do this by clicking on the `Create Repository` button on the DockerHub
+website.
+
+<img src="screenshots/instructions1.png" width=500/>
+
+Choose a name for your repository and add a description if you want.
+Then click on `Create`.
+
+<img src="screenshots/instructions2.png" width=500/>
+
+Afterwards, you need to create a personal access token.
+You can do this by clicking on your profile picture in the top right corner
+and then clicking on `Account Settings`.
+
+Then click on `Security` in the left sidebar and then on `New Access Token`.
+
+<img src="screenshots/instructions3.png" width=500/>
+
+Choose a name for your token and click on `Generate`.
+
+<img src="screenshots/instructions4.png" width=500/>
+
+Copy the token and store it somewhere safe (you won't be able to see it again
+after you close the window).
+
+<img src="screenshots/instructions5.png" width=500/>
+
 ### Setting up the GitHub repo
 
 Just create an empty GitHub repository and add the following files to it:
@@ -203,6 +233,7 @@ is no testing involved).
 - add Dockerfile
 - add basic CI/CD workflow
 - add the Dockerhub API key and username to the repository secrets
+
 
 ### Versioning your images
 - add additional CI/CD workflow for tagged commits
