@@ -1,10 +1,11 @@
 # Docker on Maxwell
 
 This repository contains a getting-started with Docker/Singularity containers on the
-UHH Maxwell cluster.
+[UHH Maxwell cluster](https://confluence.desy.de/display/MXW/).
 If you see this as a non-UHH person but try to figure out how to run Docker containers
 on another HPC, this should be applicable to your environment as well (assuming
 your cluster has `singularity` installed).
+
 
 ## TL;DR
 - Docker containers allow users to create *isolated* and *reproducible* environments
