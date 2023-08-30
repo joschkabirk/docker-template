@@ -17,6 +17,8 @@ your cluster has `singularity` installed).
 - Once set up, singularity allows you and your colleagues to use exactly the
   same environment. **no more "it works on my machine"**
 
+## Table of contents
+
 <!-- toc -->
 
 - [What is Docker?](#what-is-docker)
