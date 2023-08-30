@@ -1,9 +1,10 @@
 # Docker on Maxwell
 
 This repository contains a getting-started with Docker/Singularity containers on the
-[UHH Maxwell cluster](https://confluence.desy.de/display/MXW/).
+[Uni Hamburg (UHH) Maxwell cluster](https://confluence.desy.de/display/MXW/).
+
 If you see this as a non-UHH person but try to figure out how to run Docker containers
-on another HPC, this should be applicable to your environment as well (assuming
+on another HPC: this should be applicable to your environment as well (assuming
 your cluster has `singularity` installed).
 
 
@@ -164,9 +165,41 @@ the `hello-world` container.
 
 ## Creating your own images
 
+This section will guide you through the process of creating your own images
+and how to version them using GitHub and DockerHub.
+
+Versioning your images is very useful, because it allows you to go back to
+previous versions of your image if you run into problems with the current
+version.
+
+The main idea of this setup is that you have a GitHub repository that contains
+your Dockerfile and a GitHub Action that automatically builds and pushes your
+image to DockerHub whenever you push a new commit to the repository.
+
+For commits on the `main` branch the image will be pushed to DockerHub with
+the tag `latest`.
+For tagged commits, the image will be also pushed to DockerHub with the tag
+`<tagname>`.
+
 ### Setting up the GitHub repo
 
-- create repo
+Just create an empty GitHub repository and add the following files to it:
+
+- `Dockerfile`
+- `.github/workflows/docker_build.yml`
+
+The `Dockerfile` is the file that contains the instructions for building your
+image (check out the [Docker in 100 seconds](https://www.youtube.com/watch?v=Gjnup-PuquQ)
+video linked above for a quick introduction to Dockerfiles).
+
+The `docker_build.yml` file contains the GitHub Action that builds and pushes
+your image to DockerHub.
+GitHub Actions allows you to automate certain tasks on GitHub, like building
+and pushing your Docker image in our case.
+Check out the video [CI/CD in 100 seconds](https://www.youtube.com/watch?v=scEDHsr3APg)
+for a quick introduction to CI/CD (we just use the automation part here, there
+is no testing involved).
+
 - add Dockerfile
 - add basic CI/CD workflow
 - add the Dockerhub API key and username to the repository secrets
@@ -179,7 +212,7 @@ the `hello-world` container.
 
 ## Set up VSCode to run in singularity
 - example on how to set up
-- demo with video
+- demo with gif
 
 
 
