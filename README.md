@@ -77,7 +77,7 @@ the user-id and the file system (e.g. by default your home directory is mounted
 into the container and the user in the container is the same as the user on the
 host system).
 
-[Nice article that briefly compares Docker and Singularity](https://pythonspeed.com/articles/containers-filesystem-data-processing/#:~:text=Singularity%20is%20a%20container%20runtime,container%2C%20and%20providing%20reproducible%20images.).
+[Nice article that briefly compares Docker and Singularity](https://pythonspeed.com/articles/containers-filesystem-data-processing).
 
 ## Running Docker containers on Maxwell
 This section will guide you through the process of setting everything up for
