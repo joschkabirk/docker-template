@@ -10,6 +10,8 @@ your cluster has `singularity` installed).
 If you know what you're doing you can use this repo as a template for your own
 projects and go straight to the [Quickstart](#quickstart) section.
 
+<img src="pictures/docker_on_maxwell.png-1.png" width=600/>
+
 
 ## TL;DR
 - Docker containers allow users to create *isolated* and *reproducible* environments
