@@ -67,6 +67,7 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
+            type=schedule,pattern={{date 'YYYYMMDD'}}
             type=semver,pattern={{version}}
 
       # Build and push Docker image with Buildx (don't push on PR)
