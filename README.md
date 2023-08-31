@@ -7,6 +7,9 @@ If you see this as a non-UHH person but try to figure out how to run Docker cont
 on another HPC: this should be applicable to your environment as well (assuming
 your cluster has `singularity` installed).
 
+If you know what you're doing you can use this repo as a template for your own
+projects and go straight to the [Quickstart](#quickstart) section.
+
 
 ## TL;DR
 - Docker containers allow users to create *isolated* and *reproducible* environments
@@ -22,6 +25,8 @@ your cluster has `singularity` installed).
 
 <!-- toc -->
 
+- [Requirements](#requirements)
+- [Quickstart](#quickstart)
 - [What is Docker?](#what-is-docker)
 - [What is Singularity?](#what-is-singularity)
 - [Running Docker containers on Maxwell](#running-docker-containers-on-maxwell)
@@ -41,7 +46,7 @@ Singularity has been renamed to Apptainer some time ago, but the Maxwell cluster
 still uses a version which is called `singularity`. Just so you won't be confused when
 you google stuff about commands etc. at some point.
 
-**What you'll need:**
+## Requirements
 
 **For running containers on the cluster**:
 - Access to the cluster
@@ -53,6 +58,13 @@ you google stuff about commands etc. at some point.
 Strictly speaking, you don't need a GitHub account to create your own containers,
 but it is a good idea to use GitHub to version your Dockerfiles and to use GitHub
 Actions to automatically build and push your images to DockerHub.
+
+## Quickstart
+
+- Create a DockerHub repo with the name of your image
+- Create a GitHub repo from this template
+- Add the DockerHub username and token to the GitHub repo secrets
+- Adjust the `Dockerfile` and `docker_build.yml` files to your needs
 
 ## What is Docker?
 
