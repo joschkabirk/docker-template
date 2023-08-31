@@ -214,7 +214,20 @@ after you close the window).
 
 ### Setting up the GitHub repo
 
-Just create an empty GitHub repository and add the following files to it:
+Just create an empty GitHub repository to begin with.
+Now you need to add the DockerHub API key and username to the repository secrets.
+
+Go to the repository settings and click on `Secrets` in the left sidebar.
+Then click on `New repository secret`.
+
+<img src="screenshots/instructions6.png" width=500/>
+
+Add the following secrets:
+- `DOCKERHUB_USERNAME`: your DockerHub username
+- `DOCKERHUB_TOKEN`: the token you created in the previous section (shown in the screenshot
+  below)
+
+<img src="screenshots/instructions7.png" width=500/>
 
 - `Dockerfile`
 - `.github/workflows/docker_build.yml`
@@ -222,6 +235,12 @@ Just create an empty GitHub repository and add the following files to it:
 The `Dockerfile` is the file that contains the instructions for building your
 image (check out the [Docker in 100 seconds](https://www.youtube.com/watch?v=Gjnup-PuquQ)
 video linked above for a quick introduction to Dockerfiles).
+
+Content of the `Dockerfile`:
+```dockerfile
+FROM python:3.11
+RUN pip install numpy
+```
 
 The `docker_build.yml` file contains the GitHub Action that builds and pushes
 your image to DockerHub.
@@ -231,10 +250,69 @@ Check out the video [CI/CD in 100 seconds](https://www.youtube.com/watch?v=scEDH
 for a quick introduction to CI/CD (we just use the automation part here, there
 is no testing involved).
 
-- add Dockerfile
-- add basic CI/CD workflow
-- add the Dockerhub API key and username to the repository secrets
+Content of the `docker_build.yml` file:
+**Note**: replace `<image_name>` with the name of your image (the name you chose
+when you created the DockerHub repository).
 
+```yaml
+name: Docker build
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - 'main'
+    tags:
+      - '*'
+
+env:
+  CONTAINER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
+  IMAGE_NAME: <image_name>
+
+jobs:
+  build_latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build image
+        run: docker build -f Dockerfile --tag ${CONTAINER_REPO}/${IMAGE_NAME}:latest .
+
+      # Login and push this image if this is on the main branch
+      - name: Login to Dockerhub
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: docker push ${CONTAINER_REPO}/${IMAGE_NAME}:latest
+
+  build_release:
+    # Build an extra image for tagged commits
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.ref, 'refs/tags')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build image
+        run: docker build -f Dockerfile --tag ${CONTAINER_REPO}/${IMAGE_NAME}:${{  github.ref_name  }} .
+
+      - name: Login to Dockerhub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push image
+        run: docker push ${CONTAINER_REPO}/${IMAGE_NAME}:${{  github.ref_name  }}
+```
 
 ### Versioning your images
 - add additional CI/CD workflow for tagged commits
