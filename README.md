@@ -237,6 +237,7 @@ image (check out the [Docker in 100 seconds](https://www.youtube.com/watch?v=Gjn
 video linked above for a quick introduction to Dockerfiles).
 
 Content of the `Dockerfile`:
+
 ```dockerfile
 FROM python:3.11
 RUN pip install numpy
