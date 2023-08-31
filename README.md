@@ -205,12 +205,12 @@ First, create a DockerHub repository.
 You can do this by clicking on the `Create Repository` button on the DockerHub
 website.
 
-<img src="screenshots/instructions1.png" width=500/>
+<img src="pictures/instructions1.png" width=500/>
 
 Choose a name for your repository and add a description if you want.
 Then click on `Create`.
 
-<img src="screenshots/instructions2.png" width=500/>
+<img src="pictures/instructions2.png" width=500/>
 
 Afterwards, you need to create a personal access token.
 You can do this by clicking on your profile picture in the top right corner
@@ -218,16 +218,16 @@ and then clicking on `Account Settings`.
 
 Then click on `Security` in the left sidebar and then on `New Access Token`.
 
-<img src="screenshots/instructions3.png" width=500/>
+<img src="pictures/instructions3.png" width=500/>
 
 Choose a name for your token and click on `Generate`.
 
-<img src="screenshots/instructions4.png" width=500/>
+<img src="pictures/instructions4.png" width=500/>
 
 Copy the token and store it somewhere safe (you won't be able to see it again
 after you close the window).
 
-<img src="screenshots/instructions5.png" width=500/>
+<img src="pictures/instructions5.png" width=500/>
 
 ### Setting up the GitHub repo
 
@@ -239,7 +239,7 @@ to the GitHub repository secrets / variables.
 Go to the repository settings and click on `Secrets` in the left sidebar.
 Then click on `New repository secret`.
 
-<img src="screenshots/instructions6.png" width=500/>
+<img src="pictures/instructions6.png" width=500/>
 
 Add the following secrets:
 - `DOCKERHUB_USERNAME`: your DockerHub username
@@ -249,7 +249,7 @@ Add the following secrets:
 Afterwards, click on "Variables" and add the following variable:
 - `DOCKERHUB_REPO`: the name of your image / repo on DockerHub
 
-<img src="screenshots/instructions7.png" width=500/>
+<img src="pictures/instructions7.png" width=500/>
 
 There are two files in this repository that are important for building and
 pushing your image to DockerHub:
