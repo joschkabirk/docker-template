@@ -3,21 +3,21 @@
 This repository contains a getting-started with Docker/Singularity containers on the
 [Uni Hamburg (UHH) Maxwell cluster](https://confluence.desy.de/display/MXW/).
 
-If you see this as a non-UHH person but try to figure out how to run Docker containers
+If you see this as a non-UHH person but try to figure out how to run Docker images
 on another HPC: this should be applicable to your environment as well (assuming
 your cluster has `singularity` installed).
 
 If you know what you're doing you can use this repo as a template for your own
 projects and go straight to the [Quickstart](#quickstart) section.
 
-<img src="pictures/docker_on_maxwell.png-1.png" width=600/>
+<img src="pictures/docker_on_maxwell-1.png" width=600/>
 
 
 ## TL;DR
-- Docker containers allow users to create *isolated* and *reproducible* environments
-  where especially the *reproducible* part is crucial for computing in Science
+- Docker images allow users to create *isolated* and *reproducible* environments
+- Especially the *reproducible* part is crucial for computing in Science
 - Singularity is a container runtime that is installed on most HPCs and can run
-  Docker containers
+  Docker images
 - Using docker/singularity containers can be seen as a more robust alternative
   to conda environments (if we just talk about creating python environments)
 - Once set up, singularity allows you and your colleagues to use exactly the
