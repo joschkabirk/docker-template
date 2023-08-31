@@ -65,7 +65,10 @@ Actions to automatically build and push your images to DockerHub.
 
 - Create a DockerHub repo with the name of your image
 - Create a GitHub repo from this template
-- Add the DockerHub username and token to the GitHub repo secrets
+- Add the DockerHub username, repo and token to the GitHub repo secrets/variables
+  - `DOCKERHUB_USERNAME`: your DockerHub username (as secret)
+  - `DOCKERHUB_TOKEN`: your DockerHub token (as secret)
+  - `DOCKERHUB_REPO`: the name of your image / repo on DockerHub (as variable)
 - Adjust the `Dockerfile` and `docker_build.yml` files to your needs
 
 ## What is Docker?
