@@ -268,6 +268,11 @@ FROM python:3.11
 RUN pip install numpy
 ```
 
+This Dockerfile will create an image based on the `python:3.11` image and
+install `numpy` in it.
+This will then create the environment that you can use for your data analysis,
+send it to your colleagues etc.
+
 The `docker-publish.yml` file contains the GitHub Action that builds and pushes
 your image to DockerHub.
 GitHub Actions allows you to automate certain tasks on GitHub, like building
