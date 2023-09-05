@@ -86,15 +86,17 @@ seconds:
 
 ## What is Singularity?
 
-The not very technical answer is that Singularity is a container runtime that
-can run Docker containers.
+Singularity is a container runtime that can run Docker containers.
 Usually, you would use Singularity to run containers on HPCs where you don't
 have root access and can't install Docker.
 
-Singularity kind of reduces the isolation of Docker containers, in terms of 
-the user-id and the file system (e.g. by default your home directory is mounted
-into the container and the user in the container is the same as the user on the
-host system).
+Singularity reduces the isolation of Docker containers slightly, in terms of 
+which used id is used whithin the container and what parts of the host file system
+you can access. In Singularity, your home directory is mounted into the container 
+by default and the user in the container is the same as the user on the
+host system.
+This simplifies the process of running containers on HPCs, because you don't
+have to worry about mounting directories and permissions.
 
 [Nice article that briefly compares Docker and Singularity](https://pythonspeed.com/articles/containers-filesystem-data-processing).
 
