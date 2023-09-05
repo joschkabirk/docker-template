@@ -1,11 +1,11 @@
-# Docker on Maxwell
+# Docker template
 
-This repository contains a getting-started with Docker/Singularity containers on the
-[Uni Hamburg (UHH) Maxwell cluster](https://confluence.desy.de/display/MXW/).
+This repository is a template for managing a Docker image with automated
+building and publishing via GitHub Actions.
 
-If you see this as a non-UHH person but try to figure out how to run Docker images
-on another HPC: this should be applicable to your environment as well (assuming
-your cluster has `singularity` installed).
+The README here also contains a guide on getting-started with Docker/Singularity containers on the
+[Uni Hamburg (UHH) Maxwell cluster](https://confluence.desy.de/display/MXW/), which
+should also be applicable to other HPCs.
 
 If you know what you're doing you can use this repo as a template for your own
 projects and go straight to the [Quickstart](#quickstart) section.
