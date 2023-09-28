@@ -7,8 +7,8 @@ The README here also contains a guide on getting-started with Docker/Singularity
 [Uni Hamburg (UHH) Maxwell cluster](https://confluence.desy.de/display/MXW/), which
 should also be applicable to other HPCs.
 
-If you know what you're doing you can use this repo as a template for your own
-projects and go straight to the [Quickstart](#quickstart) section.
+If you know already what Docker and Singularity are, you can go straight to the
+[Quickstart](#quickstart) section.
 
 <img src="pictures/docker_on_maxwell-1.png" width=600/>
 
@@ -38,8 +38,8 @@ projects and go straight to the [Quickstart](#quickstart) section.
   * [Setting up the DockerHub repo](#setting-up-the-dockerhub-repo)
   * [Setting up the GitHub repo](#setting-up-the-github-repo)
   * [Versioning your images](#versioning-your-images)
-  * [Pulling the image to Maxwell](#pulling-the-image-to-maxwell)
-- [Set up VSCode to run in singularity](#set-up-vscode-to-run-in-singularity)
+  * [Pulling the image to Maxwell (or any other HPC)](#pulling-the-image-to-maxwell-or-any-other-hpc)
+- [Set up VSCode for remote development with singularity](#set-up-vscode-for-remote-development-with-singularity)
 
 <!-- tocstop -->
 
@@ -113,9 +113,12 @@ build/version/manage them using GitHub and DockerHub.
 In order to avoid running into storage limit problems, we will assign the
 singularity cache to a directory in your `/beegfs` directory (this is 
 Maxwell-specific).
+You can of course also use a different directory if you want, but make sure
+that you have enough space there.
 
 First we create a directory where we want to store the cache and the temporary
 files created by singularity:
+
 ```bash
 mkdir -p /beegfs/desy/user/$USER/.singularity/cache
 mkdir -p /beegfs/desy/user/$USER/.singularity/tmp
@@ -125,6 +128,7 @@ Then we need to tell singularity to use these directories by setting the
 environment variables `SINGULARITY_CACHEDIR` and `SINGULARITY_TMPDIR`.
 
 Add the following to your `.bashrc` (or `.zshrc` if you use zsh):
+
 ```bash
 export SINGULARITY_CACHEDIR=/beegfs/desy/user/$USER/.singularity/cache
 export SINGULARITY_TMPDIR=/beegfs/desy/user/$USER/.singularity/tmp
@@ -176,8 +180,9 @@ For more examples and ideas, visit:
  ```
  
 **What happened here?**
-When you executed the `singularity run` command, singularity first downloaded
-the docker image from DockerHub and then converted it to a singularity image
+
+When you executed the `singularity run` command, Singularity first downloaded
+the Docker image from DockerHub and then converted it to a Singularity image
 (`.sif` file).
 After that, it executed the image and streamed the output to your terminal.
 The output `Hello from Docker!` and the lines after that are the output of 
@@ -324,13 +329,33 @@ to even share that file with colleagues (they just need read permission for that
 file).
 
 ```shell
-singularity build docker://<username>/<repo>:<tag> <path>/<to>/<image>/<file>
+singularity build docker://<username>/<repo>:<tag> <path>/<to>/<image>/<file>.sif
 ```
 
 
-## Set up VSCode to run in singularity
-- example on how to set up
-- demo with gif
+## Set up VSCode for remote development with singularity
+
+You can also use singularity containers for remote development
+in VSCode.
+
+To set up everything, install the remote development extension pack in VSCode.
+
+Afterwards, add the following to your `.ssh/config` file:
+
+```
+Host singularity_image~*
+    RemoteCommand export SINGULARITY_CACHEDIR=/beegfs/desy/user/<username>/.singularity/cache && export SINGULARITY_TMPDIR=/beegfs/desy/user/<username>/.singularity/tmp && singularity shell --nv -B /beegfs/desy/user path/to/image.sif
+    RequestTTY yes
+
+Host max-wgs-sing singularity_image~max-wgs-sing
+    HostName max-wgs.desy.de
+    ProxyCommand ssh -W %h:%p jump-host
+    User <username>
+```
+
+In the config above, the `jump-host` is a proxy server that you can use to
+connect to the Maxwell cluster.
+
 
 
 
