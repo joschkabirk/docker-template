@@ -285,10 +285,48 @@ is no testing involved).
 
 
 ### Versioning your images
-- add additional CI/CD workflow for tagged commits
 
-### Pulling the image to Maxwell
-- example command to build/convert image
+The GitHub Action that we set up in the previous section will automatically
+build and push your image to DockerHub whenever you push a new commit to the
+repository.
+However, it will always push the image with the tag `latest`.
+
+If you want to version your images, you can do this by creating a new tag
+for your commit.
+You can do this by clicking on the `Releases` tab in your repository and then
+on `Create a new release`.
+
+
+### Pulling the image to Maxwell (or any other HPC)
+
+Now that you have your image on DockerHub, you can pull it to Maxwell and run
+it with singularity.
+
+```shell
+singularity run docker://<username>/<repo>:<tag>
+```
+
+I.e. if your username is `johndoe`, your repo is `myimage` and your tag is
+`v1.0`, you would run:
+
+```shell
+singularity run docker://johndoe/myimage:v1.0
+```
+
+The first time you run this command, singularity will download the image from
+DockerHub and convert it to a singularity image.
+Afterwards, it will execute the image and stream the output to your terminal.
+
+The conversion can take quite some time once your image gets larger.
+
+You can also specify a name of the singularity image file, which allows you
+to even share that file with colleagues (they just need read permission for that
+file).
+
+```shell
+singularity build docker://<username>/<repo>:<tag> <path>/<to>/<image>/<file>
+```
+
 
 ## Set up VSCode to run in singularity
 - example on how to set up
