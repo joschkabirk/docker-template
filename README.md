@@ -362,7 +362,7 @@ via the VSCode command palette with `Ctrl+Shift+P` and then typing
 
 ```json
 "remote.SSH.serverInstallPath": {
-  "pytorch_joschka~max-wgse-sing": "/beegfs/desy/user/<username>/.vscode-container/<container-name>",
+  "singularity_image~max-wgse-sing": "/beegfs/desy/user/<username>/.vscode-container/<container-name>",
 },
 "remote.SSH.enableRemoteCommand": true,
 ```
