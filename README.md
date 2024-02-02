@@ -340,7 +340,9 @@ in VSCode.
 
 To set up everything, install the remote development extension pack in VSCode.
 
-Afterwards, add the following to your `.ssh/config` file:
+### `.ssh/config` file setup
+
+Add the following to your `.ssh/config` file:
 
 ```
 Host singularity_image~*
@@ -349,13 +351,28 @@ Host singularity_image~*
 
 Host max-wgs-sing singularity_image~max-wgs-sing
     HostName max-wgs.desy.de
-    ProxyCommand ssh -W %h:%p jump-host
     User <username>
 ```
 
-In the config above, the `jump-host` is a proxy server that you can use to
-connect to the Maxwell cluster.
+### VSCode settings
 
+Add the following to your VSCode settings (you can open the `settings.json` file
+via the VSCode command palette with `Ctrl+Shift+P` and then typing 
+`Preferences: Open User Settings (JSON)`):
 
+```json
+"remote.SSH.serverInstallPath": {
+  "pytorch_joschka~max-wgse-sing": "/beegfs/desy/user/<username>/.vscode-container/<container-name>",
+},
+"remote.SSH.enableRemoteCommand": true,
+```
 
+This will enable the remote command feature in VSCode, which allows you to
+run the singularity container on the remote machine and then connect to it.
+
+It will also set the path to where you want to store the VSCode server on the
+remote machine (specifying this path is recommended, especially if you are
+working with multiple containers on the same machine, because otherwise the
+VSCode server files will be stored in the home directory and you will have to
+delete them manually if you want to switch to a different container).
 
