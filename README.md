@@ -5,41 +5,46 @@ building and publishing via GitHub Actions.
 
 The README here also contains a guide on getting-started with Docker/Singularity containers on the
 [Uni Hamburg (UHH) Maxwell cluster](https://confluence.desy.de/display/MXW/), which
-should also be applicable to other HPCs.
+should also be applicable to other HPC clusters.
 
 If you know already what Docker and Singularity are, you can go straight to the
-[Quickstart](#quickstart) section.
+[Quick-start](#quickstart) section.
 
 <img src="pictures/docker_on_maxwell-1.png" width=600/>
 
-
 ## TL;DR
+
 - Docker images allow users to create *isolated* and *reproducible* environments
 - Especially the *reproducible* part is crucial for computing in Science
-- Singularity is a container runtime that is installed on most HPCs and can run
-  Docker images
+- Singularity is a container runtime that is installed on most HPC clusters and
+  can run Docker images
 - Using docker/singularity containers can be seen as a more robust alternative
-  to conda environments (if we just talk about creating python environments)
+  to `conda` environments (if we just talk about creating python environments)
 - Once set up, singularity allows you and your colleagues to use exactly the
-  same environment. **no more "it works on my machine"**
+  same environment - **no more "it works on my machine"**
 
 ## Table of contents
 
 <!-- toc -->
 
-- [Requirements](#requirements)
-- [Quickstart](#quickstart)
-- [What is Docker?](#what-is-docker)
-- [What is Singularity?](#what-is-singularity)
-- [Running Docker containers on Maxwell](#running-docker-containers-on-maxwell)
-  * [Mandatory configuration](#mandatory-configuration)
-  * [Running your first container](#running-your-first-container)
-- [Creating your own images](#creating-your-own-images)
-  * [Setting up the DockerHub repo](#setting-up-the-dockerhub-repo)
-  * [Setting up the GitHub repo](#setting-up-the-github-repo)
-  * [Versioning your images](#versioning-your-images)
-  * [Pulling the image to Maxwell (or any other HPC)](#pulling-the-image-to-maxwell-or-any-other-hpc)
-- [Set up VSCode for remote development with singularity](#set-up-vscode-for-remote-development-with-singularity)
+- [Docker template](#docker-template)
+  - [TL;DR](#tldr)
+  - [Table of contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Quickstart](#quickstart)
+  - [What is Docker?](#what-is-docker)
+  - [What is Singularity?](#what-is-singularity)
+  - [Running Docker containers on Maxwell](#running-docker-containers-on-maxwell)
+    - [Mandatory configuration](#mandatory-configuration)
+    - [Running your first container](#running-your-first-container)
+  - [Creating your own images](#creating-your-own-images)
+    - [Setting up the DockerHub repo](#setting-up-the-dockerhub-repo)
+    - [Setting up the GitHub repo](#setting-up-the-github-repo)
+    - [Versioning your images](#versioning-your-images)
+    - [Pulling the image to Maxwell (or any other HPC)](#pulling-the-image-to-maxwell-or-any-other-hpc)
+  - [Set up VSCode for remote development with singularity](#set-up-vscode-for-remote-development-with-singularity)
+    - [`.ssh/config` file setup](#sshconfig-file-setup)
+    - [VSCode settings](#vscode-settings)
 
 <!-- tocstop -->
 
@@ -51,9 +56,11 @@ you google stuff about commands etc. at some point.
 ## Requirements
 
 **For running containers on the cluster**:
+
 - Access to the cluster
 
 **For creating your own containers**:
+
 - A GitHub account
 - A DockerHub account
 
@@ -87,31 +94,33 @@ seconds:
 ## What is Singularity?
 
 Singularity is a container runtime that can run Docker containers.
-Usually, you would use Singularity to run containers on HPCs where you don't
+Usually, you would use Singularity to run containers on HPC clusters where you don't
 have root access and can't install Docker.
 
-Singularity reduces the isolation of Docker containers slightly, in terms of 
-which used id is used whithin the container and what parts of the host file system
-you can access. In Singularity, your home directory is mounted into the container 
+Singularity reduces the isolation of Docker containers slightly, in terms of
+which used ID is used within the container and what parts of the host file system
+you can access. In Singularity, your home directory is mounted into the container
 by default and the user in the container is the same as the user on the
 host system.
-This simplifies the process of running containers on HPCs, because you don't
+This simplifies the process of running containers on HPC clusters, because you don't
 have to worry about mounting directories and permissions.
 
 [Nice article that briefly compares Docker and Singularity](https://pythonspeed.com/articles/containers-filesystem-data-processing).
 
 ## Running Docker containers on Maxwell
+
 This section will guide you through the process of setting everything up for
 running Docker containers on Maxwell using Singularity.
 
-For this, we assume that you have the name/url of a docker image that you want
+For this, we assume that you have the name/URL of a docker image that you want
 to run.
-Later sections will explain how you can create your own images and can 
+Later sections will explain how you can create your own images and can
 build/version/manage them using GitHub and DockerHub.
 
 ### Mandatory configuration
+
 In order to avoid running into storage limit problems, we will assign the
-singularity cache to a directory in your `/beegfs` directory (this is 
+singularity cache to a directory in your `/beegfs` directory (this is
 Maxwell-specific).
 You can of course also use a different directory if you want, but make sure
 that you have enough space there.
@@ -127,7 +136,7 @@ mkdir -p /beegfs/desy/user/$USER/.singularity/tmp
 Then we need to tell singularity to use these directories by setting the
 environment variables `SINGULARITY_CACHEDIR` and `SINGULARITY_TMPDIR`.
 
-Add the following to your `.bashrc` (or `.zshrc` if you use zsh):
+Add the following to your `.bashrc` (or `.zshrc` if you use `zsh`):
 
 ```bash
 export SINGULARITY_CACHEDIR=/beegfs/desy/user/$USER/.singularity/cache
@@ -135,6 +144,7 @@ export SINGULARITY_TMPDIR=/beegfs/desy/user/$USER/.singularity/tmp
 ```
 
 ### Running your first container
+
 With this setup, you can now run your first container.
 For this, we will use the `hello-world` container from DockerHub.
 
@@ -178,14 +188,14 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
  ```
- 
+
 **What happened here?**
 
 When you executed the `singularity run` command, Singularity first downloaded
 the Docker image from DockerHub and then converted it to a Singularity image
 (`.sif` file).
 After that, it executed the image and streamed the output to your terminal.
-The output `Hello from Docker!` and the lines after that are the output of 
+The output `Hello from Docker!` and the lines after that are the output of
 the `hello-world` container.
 
 ## Creating your own images
@@ -249,11 +259,13 @@ Then click on `New repository secret`.
 <img src="pictures/instructions6.png" width=500/>
 
 Add the following secrets:
+
 - `DOCKERHUB_USERNAME`: your DockerHub username
 - `DOCKERHUB_TOKEN`: the token you created in the previous section (shown in the screenshot
   below)
 
 Afterwards, click on "Variables" and add the following variable:
+
 - `DOCKERHUB_REPO`: the name of your image / repo on DockerHub
 
 <img src="pictures/instructions7.png" width=500/>
@@ -288,7 +300,6 @@ Check out the video [CI/CD in 100 seconds](https://www.youtube.com/watch?v=scEDH
 for a quick introduction to CI/CD (we just use the automation part here, there
 is no testing involved).
 
-
 ### Versioning your images
 
 The GitHub Action that we set up in the previous section will automatically
@@ -300,7 +311,6 @@ If you want to version your images, you can do this by creating a new tag
 for your commit.
 You can do this by clicking on the `Releases` tab in your repository and then
 on `Create a new release`.
-
 
 ### Pulling the image to Maxwell (or any other HPC)
 
@@ -325,13 +335,12 @@ Afterwards, it will execute the image and stream the output to your terminal.
 The conversion can take quite some time once your image gets larger.
 
 You can also specify a name of the singularity image file, which allows you
-to even share that file with colleagues (they just need read permission for that
+to even share that file with colleagues (they just need `read` permission for that
 file).
 
 ```shell
 singularity build docker://<username>/<repo>:<tag> <path>/<to>/<image>/<file>.sif
 ```
-
 
 ## Set up VSCode for remote development with singularity
 
@@ -357,7 +366,7 @@ Host max-wgs-sing singularity_image~max-wgs-sing
 ### VSCode settings
 
 Add the following to your VSCode settings (you can open the `settings.json` file
-via the VSCode command palette with `Ctrl+Shift+P` and then typing 
+via the VSCode command palette with `Ctrl+Shift+P` and then typing
 `Preferences: Open User Settings (JSON)`):
 
 ```json
@@ -370,9 +379,14 @@ via the VSCode command palette with `Ctrl+Shift+P` and then typing
 This will enable the remote command feature in VSCode, which allows you to
 run the singularity container on the remote machine and then connect to it.
 
-It will also set the path to where you want to store the VSCode server on the
-remote machine (specifying this path is recommended, especially if you are
+It will also set the path to where you want to store the VSCode container files
+on the remote machine (specifying this path is recommended, especially if you are
 working with multiple containers on the same machine, because otherwise the
-VSCode server files will be stored in the home directory and you will have to
+VSCode server files will be stored in the home directory, and you will have to
 delete them manually if you want to switch to a different container).
 
+Also create the directory on the remote machine:
+
+```shell
+mkdir -p /beegfs/desy/user/<username>/.vscode-container/<container-name>
+```
