@@ -41,7 +41,7 @@ jobs:
           
       - name: Push image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: docker push ${CONTAINER_REGISTRY}/${IMAGE_NAME}:latest
+        run: docker push ${IMAGE_NAME}:latest
   build_release:
     # Build an extra image for tagged commits
     runs-on: ubuntu-latest
