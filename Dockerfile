@@ -1,2 +1,2 @@
 FROM python:3.11
-RUN pip install nump pandas
+RUN pip install numpy
