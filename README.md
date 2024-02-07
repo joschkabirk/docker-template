@@ -43,6 +43,7 @@ If you know already what Docker and Singularity are, you can go straight to the
     - [Versioning your images](#versioning-your-images)
     - [Pulling the image to Maxwell (or any other HPC)](#pulling-the-image-to-maxwell-or-any-other-hpc)
   - [Set up VSCode for remote development with singularity](#set-up-vscode-for-remote-development-with-singularity)
+    - [`Dockerfile`](#dockerfile)
     - [`.ssh/config` file setup](#sshconfig-file-setup)
     - [VSCode settings](#vscode-settings)
 
@@ -348,6 +349,18 @@ You can also use singularity containers for remote development
 in VSCode.
 
 To set up everything, install the remote development extension pack in VSCode.
+
+### `Dockerfile`
+
+If you want to use this image for remote development with VSCode, you need to
+install either `curl` or `wget` in the image, because the VSCode server
+installation script uses one of these tools to download the server files.
+
+Add the following line to your `Dockerfile`:
+
+```dockerfile
+RUN apt-get update && apt-get install -y curl wget
+```
 
 ### `.ssh/config` file setup
 
