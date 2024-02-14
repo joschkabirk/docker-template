@@ -264,12 +264,13 @@ Add the following secrets:
 - `DOCKERHUB_TOKEN`: the token you created in the previous section (shown in the screenshot
   below)
 
+<img src="pictures/instructions7.png" width=500/>
+
 Afterwards, click on "Variables" and add the following variable:
 
 - `DOCKERHUB_USERNAME`: your DockerHub username
 - `DOCKERHUB_REPO`: the name of your image / repo on DockerHub
 
-<img src="pictures/instructions7.png" width=500/>
 
 There are two files in this repository that are important for building and
 pushing your image to DockerHub:
