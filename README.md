@@ -74,8 +74,8 @@ Actions to automatically build and push your images to DockerHub.
 - Create a DockerHub repo with the name of your image
 - Create a GitHub repo from this template
 - Add the DockerHub username, repo and token to the GitHub repo secrets/variables
-  - `DOCKERHUB_USERNAME`: your DockerHub username (as secret)
   - `DOCKERHUB_TOKEN`: your DockerHub token (as secret)
+  - `DOCKERHUB_USERNAME`: your DockerHub username (as variable)
   - `DOCKERHUB_REPO`: the name of your image / repo on DockerHub (as variable)
 - Adjust the `Dockerfile` and `docker-publish.yml` files to your needs
 
@@ -261,12 +261,12 @@ Then click on `New repository secret`.
 
 Add the following secrets:
 
-- `DOCKERHUB_USERNAME`: your DockerHub username
 - `DOCKERHUB_TOKEN`: the token you created in the previous section (shown in the screenshot
   below)
 
 Afterwards, click on "Variables" and add the following variable:
 
+- `DOCKERHUB_USERNAME`: your DockerHub username
 - `DOCKERHUB_REPO`: the name of your image / repo on DockerHub
 
 <img src="pictures/instructions7.png" width=500/>
