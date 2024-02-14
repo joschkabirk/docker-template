@@ -30,7 +30,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Build image (without tag for pull request)
+        if: github.event_name == 'push' && github.event_name == 'pull_request'
+        run: docker build -f Dockerfile .
+
       - name: Build image
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: docker build -f Dockerfile --tag ${IMAGE_NAME}:latest .
 
       # Login and push this image if this is on the main branch
