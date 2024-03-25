@@ -29,7 +29,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build image (without tag for pull request)
-        if: github.event_name == 'push' && github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         run: docker build -f Dockerfile .
 
       - name: Build image
