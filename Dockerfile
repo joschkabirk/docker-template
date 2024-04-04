@@ -5,3 +5,8 @@ FROM python:3.11
 RUN apt-get update && apt-get install -y curl wget git
 
 RUN pip install numpy
+
+# This is required if you want to use slurm inside the container
+# (in addition to the slurm installation on the host machine, and
+# the corresponding libraries mounted into the container)
+RUN adduser --disabled-password --gecos "" slurm
