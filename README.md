@@ -417,7 +417,7 @@ Example:
 singularity exec -B /home -B /beegfs -B /usr/bin/scancel,/usr/bin/squeue,/usr/bin/sbatch,/usr/bin/sinfo,/usr/lib64/libreadline.so.6,/usr/lib64/libhistory.so.6,/usr/lib64/libtinfo.so.5,/var/run/munge,/usr/lib64/libmunge.so.2,/usr/lib64/libmunge.so.2.0.0,/run/munge,/etc/slurm,/usr/lib64/slurm docker://jobirk/docker-on-maxwell /bin/bash
 ```
 
-This command will run the container `jobirk/eshell` with the specified libraries
-mounted into the container, i.e. the part
+This command will run the container `jobirk/docker-on-maxwell` (which is the image built
+from this repo) with the specified libraries mounted into the container, i.e. the part
 `-B /usr/bin/scancel,/usr/bin/squeue,/usr/bin/sbatch,/usr/bin/sinfo,/usr/lib64/libreadline.so.6,/usr/lib64/libhistory.so.6,/usr/lib64/libtinfo.so.5,/var/run/munge,/usr/lib64/libmunge.so.2,/usr/lib64/libmunge.so.2.0.0,/run/munge,/etc/slurm,/usr/lib64/slurm`
 is what we need in order to make the slurm commands available in the container.
