@@ -46,7 +46,7 @@ If you know already what Docker and Singularity are, you can go straight to the
     - [`Dockerfile`](#dockerfile)
     - [`.ssh/config` file setup](#sshconfig-file-setup)
     - [VSCode settings](#vscode-settings)
-  - [Slurm support](#slurm-support)
+  - [Slurm support (experimental)](#slurm-support-experimental)
 
 <!-- tocstop -->
 
@@ -406,11 +406,14 @@ Also create the directory on the remote machine:
 mkdir -p /beegfs/desy/user/<username>/.vscode-container/<container-name>
 ```
 
-## Slurm support
+## Slurm support (experimental)
 
 If you want to be able to submit jobs to the cluster from within the container,
 you need to add the required libraries to the container with the `-B` flag
 when you run the container with singularity.
+**Note that this might lead to problems if the libraries on the host system
+are not compatible with the libraries in the container. Furthermore, it kind of
+destroys the nice feature of containers being isolated and reproducible environments.**
 
 Example:
 ```shell
