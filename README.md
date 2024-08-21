@@ -122,7 +122,7 @@ build/version/manage them using GitHub and DockerHub.
 ### Mandatory configuration
 
 In order to avoid running into storage limit problems, we will assign the
-singularity cache to a directory in your `/beegfs` directory (this is
+singularity cache to a directory in your Dust directory (this is
 Maxwell-specific).
 You can of course also use a different directory if you want, but make sure
 that you have enough space there.
@@ -131,8 +131,8 @@ First we create a directory where we want to store the cache and the temporary
 files created by singularity:
 
 ```bash
-mkdir -p /beegfs/desy/user/$USER/.singularity/cache
-mkdir -p /beegfs/desy/user/$USER/.singularity/tmp
+mkdir -p /gpfs/dust/maxwell/user/$USER/.singularity/cache
+mkdir -p /gpfs/dust/maxwell/user/$USER/.singularity/tmp
 ```
 
 Then we need to tell singularity to use these directories by setting the
@@ -141,8 +141,8 @@ environment variables `SINGULARITY_CACHEDIR` and `SINGULARITY_TMPDIR`.
 Add the following to your `.bashrc` (or `.zshrc` if you use `zsh`):
 
 ```bash
-export SINGULARITY_CACHEDIR=/beegfs/desy/user/$USER/.singularity/cache
-export SINGULARITY_TMPDIR=/beegfs/desy/user/$USER/.singularity/tmp
+export SINGULARITY_CACHEDIR=/gpfs/dust/maxwell/user/$USER/.singularity/cache
+export SINGULARITY_TMPDIR=/gpfs/dust/maxwell/user/$USER/.singularity/tmp
 ```
 
 ### Running your first container
@@ -370,7 +370,7 @@ Add the following to your `.ssh/config` file:
 
 ```
 Host singularity_image~*
-    RemoteCommand export SINGULARITY_CACHEDIR=/beegfs/desy/user/<username>/.singularity/cache && export SINGULARITY_TMPDIR=/beegfs/desy/user/<username>/.singularity/tmp && singularity shell --nv -B /beegfs/desy/user path/to/image.sif
+    RemoteCommand export SINGULARITY_CACHEDIR=/gpfs/dust/maxwell/user/<username>/.singularity/cache && export SINGULARITY_TMPDIR=/gpfs/dust/maxwell/user/<username>/.singularity/tmp && singularity shell --nv -B /gpfs/dust/maxwell/user path/to/image.sif
     RequestTTY yes
 
 Host max-wgs-sing singularity_image~max-wgs-sing
@@ -386,7 +386,7 @@ via the VSCode command palette with `Ctrl+Shift+P` and then typing
 
 ```json
 "remote.SSH.serverInstallPath": {
-  "singularity_image~max-wgse-sing": "/beegfs/desy/user/<username>/.vscode-container/<container-name>",
+  "singularity_image~max-wgse-sing": "/gpfs/dust/maxwell/user/<username>/.vscode-container/<container-name>",
 },
 "remote.SSH.enableRemoteCommand": true,
 ```
@@ -403,7 +403,7 @@ delete them manually if you want to switch to a different container).
 Also create the directory on the remote machine:
 
 ```shell
-mkdir -p /beegfs/desy/user/<username>/.vscode-container/<container-name>
+mkdir -p /gpfs/dust/maxwell/user/<username>/.vscode-container/<container-name>
 ```
 
 ## Slurm support (experimental)
