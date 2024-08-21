@@ -46,7 +46,6 @@ If you know already what Docker and Singularity are, you can go straight to the
     - [`Dockerfile`](#dockerfile)
     - [`.ssh/config` file setup](#sshconfig-file-setup)
     - [VSCode settings](#vscode-settings)
-  - [Slurm support (experimental)](#slurm-support-experimental)
 
 <!-- tocstop -->
 
@@ -405,22 +404,3 @@ Also create the directory on the remote machine:
 ```shell
 mkdir -p /gpfs/dust/maxwell/user/<username>/.vscode-container/<container-name>
 ```
-
-## Slurm support (experimental)
-
-If you want to be able to submit jobs to the cluster from within the container,
-you need to add the required libraries to the container with the `-B` flag
-when you run the container with singularity.
-**Note that this might lead to problems if the libraries on the host system
-are not compatible with the libraries in the container. Furthermore, it kind of
-destroys the nice feature of containers being isolated and reproducible environments.**
-
-Example:
-```shell
-singularity exec -B /home -B /beegfs -B /usr/bin/scancel,/usr/bin/squeue,/usr/bin/sbatch,/usr/bin/sinfo,/usr/lib64/libreadline.so.6,/usr/lib64/libhistory.so.6,/usr/lib64/libtinfo.so.5,/var/run/munge,/usr/lib64/libmunge.so.2,/usr/lib64/libmunge.so.2.0.0,/run/munge,/etc/slurm,/usr/lib64/slurm docker://jobirk/docker-on-maxwell /bin/bash
-```
-
-This command will run the container `jobirk/docker-on-maxwell` (which is the image built
-from this repo) with the specified libraries mounted into the container, i.e. the part
-`-B /usr/bin/scancel,/usr/bin/squeue,/usr/bin/sbatch,/usr/bin/sinfo,/usr/lib64/libreadline.so.6,/usr/lib64/libhistory.so.6,/usr/lib64/libtinfo.so.5,/var/run/munge,/usr/lib64/libmunge.so.2,/usr/lib64/libmunge.so.2.0.0,/run/munge,/etc/slurm,/usr/lib64/slurm`
-is what we need in order to make the slurm commands available in the container.
