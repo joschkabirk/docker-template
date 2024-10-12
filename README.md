@@ -372,8 +372,8 @@ Host singularity_image~*
     RemoteCommand export SINGULARITY_CACHEDIR=/gpfs/dust/maxwell/user/<username>/.singularity/cache && export SINGULARITY_TMPDIR=/gpfs/dust/maxwell/user/<username>/.singularity/tmp && singularity shell --nv -B /gpfs/dust/maxwell/user path/to/image.sif
     RequestTTY yes
 
-Host max-wgs-sing singularity_image~max-wgs-sing
-    HostName max-wgs.desy.de
+Host max-wgse-sing singularity_image~max-wgse-sing
+    HostName max-wgse.desy.de
     User <username>
 ```
 
