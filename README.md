@@ -130,8 +130,8 @@ First we create a directory where we want to store the cache and the temporary
 files created by singularity:
 
 ```bash
-mkdir -p /gpfs/dust/maxwell/user/$USER/.singularity/cache
-mkdir -p /gpfs/dust/maxwell/user/$USER/.singularity/tmp
+mkdir -p /data/dust/user/$USER/.singularity/cache
+mkdir -p /data/dust/user/$USER/.singularity/tmp
 ```
 
 Then we need to tell singularity to use these directories by setting the
@@ -140,8 +140,8 @@ environment variables `SINGULARITY_CACHEDIR` and `SINGULARITY_TMPDIR`.
 Add the following to your `.bashrc` (or `.zshrc` if you use `zsh`):
 
 ```bash
-export SINGULARITY_CACHEDIR=/gpfs/dust/maxwell/user/$USER/.singularity/cache
-export SINGULARITY_TMPDIR=/gpfs/dust/maxwell/user/$USER/.singularity/tmp
+export SINGULARITY_CACHEDIR=/data/dust/user/$USER/.singularity/cache
+export SINGULARITY_TMPDIR=/data/dust/user/$USER/.singularity/tmp
 ```
 
 ### Running your first container
@@ -369,7 +369,7 @@ Add the following to your `.ssh/config` file:
 
 ```
 Host singularity_image~*
-    RemoteCommand export SINGULARITY_CACHEDIR=/gpfs/dust/maxwell/user/<username>/.singularity/cache && export SINGULARITY_TMPDIR=/gpfs/dust/maxwell/user/<username>/.singularity/tmp && singularity shell --nv -B /gpfs/dust/maxwell/user path/to/image.sif
+    RemoteCommand export SINGULARITY_CACHEDIR=/data/dust/user/<username>/.singularity/cache && export SINGULARITY_TMPDIR=/data/dust/user/<username>/.singularity/tmp && singularity shell --nv -B /data/dust/user path/to/image.sif
     RequestTTY yes
 
 Host max-wgse-sing singularity_image~max-wgse-sing
@@ -385,7 +385,7 @@ via the VSCode command palette with `Ctrl+Shift+P` and then typing
 
 ```json
 "remote.SSH.serverInstallPath": {
-  "singularity_image~max-wgse-sing": "/gpfs/dust/maxwell/user/<username>/.vscode-container/<container-name>",
+  "singularity_image~max-wgse-sing": "/data/dust/user/<username>/.vscode-container/<container-name>",
 },
 "remote.SSH.enableRemoteCommand": true,
 ```
@@ -402,5 +402,5 @@ delete them manually if you want to switch to a different container).
 Also create the directory on the remote machine:
 
 ```shell
-mkdir -p /gpfs/dust/maxwell/user/<username>/.vscode-container/<container-name>
+mkdir -p /data/dust/user/<username>/.vscode-container/<container-name>
 ```
