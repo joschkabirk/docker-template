@@ -10,7 +10,7 @@ should also be applicable to other HPC clusters.
 If you know already what Docker and Singularity are, you can go straight to the
 [Quick-start](#quickstart) section.
 
-<img src="pictures/docker_on_maxwell-1.png" width=600/>
+<img src="pictures/GitHub-DockerHub-HPC.excalidraw.png" width=600/>
 
 ## TL;DR
 
