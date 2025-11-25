@@ -4,13 +4,13 @@ This repository is a template for managing a Docker image with automated
 building and publishing via GitHub Actions.
 
 The README here also contains a guide on getting-started with Docker/Singularity containers on the
-[Uni Hamburg (UHH) Maxwell cluster](https://docs.desy.de/maxwell/), which
+[DESY Maxwell cluster](https://docs.desy.de/maxwell/), which
 should also be applicable to other HPC clusters.
 
 If you know already what Docker and Singularity are, you can go straight to the
 [Quick-start](#quickstart) section.
 
-<img src="pictures/GitHub-DockerHub-HPC.excalidraw.png" width=600/>
+![Workflow sketch](pictures/GitHub-DockerHub-HPC.excalidraw.svg)
 
 ## TL;DR
 
